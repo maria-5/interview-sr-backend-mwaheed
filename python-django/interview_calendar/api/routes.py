@@ -6,15 +6,6 @@ from sqlalchemy.exc import IntegrityError
 from psycopg.errors import ExclusionViolation, ForeignKeyViolation
 
 def register_routes(app):
-    @app.route("/api/hello")
-    def hello():
-        return {"message": "Hello from Flask!"}
-
-    @app.route("/test", methods=["GET", "POST"])
-    def test():
-        print("TEST endpoint hit")
-        return {"status": "ok"}
-
     @app.route("/appointments", methods=["POST"])
     def create_appointment():
         try:
