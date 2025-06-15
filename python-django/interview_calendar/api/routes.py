@@ -33,7 +33,10 @@ def register_routes(app):
                 return jsonify({"error": "Instructor is not available at this time."}), 400
 
             appointment = appointment_service.create_appointment(student_id, instructor_id, start_time, end_time)
-            return jsonify(AppointmentResponseSchema().dump(appointment)), 201
+            return jsonify({
+                "message": "Appointment scheduled successfully",
+                "appointment": AppointmentResponseSchema().dump(appointment)
+            }), 201
         except IntegrityError as e:
             orig = getattr(e, "orig", None)
 
