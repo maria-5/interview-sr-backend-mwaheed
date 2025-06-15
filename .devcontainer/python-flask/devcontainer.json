@@ -2,7 +2,7 @@
 // Originally based off of:
 // https://github.com/devcontainers/templates/tree/main/src/postgres
 {
-  "name": "Python 3, Django, Node.js LTS, React Router, and PostgreSQL",
+  "name": "Python 3, Flask, Node.js LTS, React Router, and PostgreSQL",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
@@ -19,7 +19,7 @@
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // This can be used to network with other containers or the host.
-  "forwardPorts": [5173, 5432, 8000],
+  "forwardPorts": [5173, 5432, 5000],
 
   // Use 'postCreateCommand' to run commands after the container is created.
   "postCreateCommand": "bash python-django/install-dependencies.sh",
