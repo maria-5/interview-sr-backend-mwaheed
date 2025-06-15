@@ -2,16 +2,11 @@ FROM mcr.microsoft.com/devcontainers/base:ubuntu
 
 ENV PYTHONUNBUFFERED 1
 
-# Install wget, gnupg2, and lsb-release (needed to add PostgreSQL repo)
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    wget gnupg2 lsb-release \
-    && rm -rf /var/lib/apt/lists/*
+# [Optional] If your requirements rarely change, uncomment this section to add them to the image.
+# COPY requirements.txt /tmp/pip-tmp/
+# RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
+#    && rm -rf /tmp/pip-tmp
 
-# Add PostgreSQL official repo for version 17
-RUN wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add - \
-    && echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list
-
-# Update and install postgresql-client-17 and libpq-dev
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    postgresql-client-17 libpq-dev \
-    && rm -rf /var/lib/apt/lists/*
+# [Optional] Uncomment this section to install additional OS packages.
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
+    && apt-get -y install --no-install-recommends libpq-dev postgresql-client
